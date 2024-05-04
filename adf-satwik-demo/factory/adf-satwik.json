@@ -1,0 +1,9 @@
+{
+	"name": "adf-satwik",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "95fb4f91-6abd-4f38-a707-cef3ef72c240",
+		"tenantId": "ccd7532c-5116-4004-9456-6fc1d49a0c3d"
+	}
+}
