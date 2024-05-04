@@ -1,0 +1,108 @@
+{
+	"name": "DS_BLOB_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZURE_BLOB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "flights.csv",
+				"container": "satwik-demo-folder"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "day",
+				"type": "String"
+			},
+			{
+				"name": "dep_time",
+				"type": "String"
+			},
+			{
+				"name": "sched_dep_time",
+				"type": "String"
+			},
+			{
+				"name": "dep_delay",
+				"type": "String"
+			},
+			{
+				"name": "arr_time",
+				"type": "String"
+			},
+			{
+				"name": "sched_arr_time",
+				"type": "String"
+			},
+			{
+				"name": "arr_delay",
+				"type": "String"
+			},
+			{
+				"name": "carrier",
+				"type": "String"
+			},
+			{
+				"name": "flight",
+				"type": "String"
+			},
+			{
+				"name": "tailnum",
+				"type": "String"
+			},
+			{
+				"name": "origin",
+				"type": "String"
+			},
+			{
+				"name": "dest",
+				"type": "String"
+			},
+			{
+				"name": "air_time",
+				"type": "String"
+			},
+			{
+				"name": "distance",
+				"type": "String"
+			},
+			{
+				"name": "hour",
+				"type": "String"
+			},
+			{
+				"name": "minute",
+				"type": "String"
+			},
+			{
+				"name": "time_hour",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			}
+		]
+	}
+}
