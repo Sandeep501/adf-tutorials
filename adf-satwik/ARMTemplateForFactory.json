@@ -1,0 +1,612 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-satwik"
+		},
+		"LS_AZURE_BLOB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZURE_BLOB'"
+		},
+		"LS_AZURE_SQL_DATABASE_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZURE_SQL_DATABASE'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_BLOB_TO_SQL_TABLE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "COPY_BLOB_TO_SQL_TABLE",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "id",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "id",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "year",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "year",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "month",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "month",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "day",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "day",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "dep_time",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "dep_time",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "sched_dep_time",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "sched_dep_time",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "dep_delay",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "dep_delay",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "arr_time",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "arr_time",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "sched_arr_time",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "sched_arr_time",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "arr_delay",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "arr_delay",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "carrier",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "carrier",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "flight",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "flight",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "tailnum",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "tailnum",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "origin",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "origin",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "dest",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "dest",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "air_time",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "air_time",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "distance",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "distance",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "hour",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "hour",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "minute",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "minute",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "time_hour",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "time_hour",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "name",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_BLOB_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_AZURE_SQL_TABLE",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_BLOB_CSV')]",
+				"[concat(variables('factoryId'), '/datasets/DS_AZURE_SQL_TABLE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZURE_BLOB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_AZURE_BLOB_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_BLOB_CSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZURE_BLOB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "flights.csv",
+						"container": "satwik-demo-folder"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "id",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "day",
+						"type": "String"
+					},
+					{
+						"name": "dep_time",
+						"type": "String"
+					},
+					{
+						"name": "sched_dep_time",
+						"type": "String"
+					},
+					{
+						"name": "dep_delay",
+						"type": "String"
+					},
+					{
+						"name": "arr_time",
+						"type": "String"
+					},
+					{
+						"name": "sched_arr_time",
+						"type": "String"
+					},
+					{
+						"name": "arr_delay",
+						"type": "String"
+					},
+					{
+						"name": "carrier",
+						"type": "String"
+					},
+					{
+						"name": "flight",
+						"type": "String"
+					},
+					{
+						"name": "tailnum",
+						"type": "String"
+					},
+					{
+						"name": "origin",
+						"type": "String"
+					},
+					{
+						"name": "dest",
+						"type": "String"
+					},
+					{
+						"name": "air_time",
+						"type": "String"
+					},
+					{
+						"name": "distance",
+						"type": "String"
+					},
+					{
+						"name": "hour",
+						"type": "String"
+					},
+					{
+						"name": "minute",
+						"type": "String"
+					},
+					{
+						"name": "time_hour",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_AZURE_BLOB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZURE_SQL_DATABASE')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_AZURE_SQL_DATABASE_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZURE_SQL_TABLE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZURE_SQL_DATABASE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "month",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "day",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "dep_time",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "sched_dep_time",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "dep_delay",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "arr_time",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "sched_arr_time",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "arr_delay",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "carrier",
+						"type": "varchar"
+					},
+					{
+						"name": "flight",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "tailnum",
+						"type": "varchar"
+					},
+					{
+						"name": "origin",
+						"type": "varchar"
+					},
+					{
+						"name": "dest",
+						"type": "varchar"
+					},
+					{
+						"name": "air_time",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "distance",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "hour",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "minute",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "time_hour",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "name",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "FlightData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_AZURE_SQL_DATABASE')]"
+			]
+		}
+	]
+}
