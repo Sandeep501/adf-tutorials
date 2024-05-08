@@ -1,0 +1,118 @@
+{
+	"name": "DS_AZURE_SQL_TABLE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZURE_SQL_DATABASE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "month",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "day",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "dep_time",
+				"type": "time",
+				"scale": 7
+			},
+			{
+				"name": "sched_dep_time",
+				"type": "time",
+				"scale": 7
+			},
+			{
+				"name": "dep_delay",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "arr_time",
+				"type": "time",
+				"scale": 7
+			},
+			{
+				"name": "sched_arr_time",
+				"type": "time",
+				"scale": 7
+			},
+			{
+				"name": "arr_delay",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "carrier",
+				"type": "varchar"
+			},
+			{
+				"name": "flight",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "tailnum",
+				"type": "varchar"
+			},
+			{
+				"name": "origin",
+				"type": "varchar"
+			},
+			{
+				"name": "dest",
+				"type": "varchar"
+			},
+			{
+				"name": "air_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "distance",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "hour",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "minute",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "time_hour",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "name",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "FlightData"
+		}
+	}
+}
