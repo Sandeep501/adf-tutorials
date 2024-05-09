@@ -1,0 +1,29 @@
+{
+	"name": "DS_GET_FILE_INFO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BLOB_INPUT_DATASET",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "DeleteFilesDatasets"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"container": "inputcontainer"
+			}
+		}
+	}
+}

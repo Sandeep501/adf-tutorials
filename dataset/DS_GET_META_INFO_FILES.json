@@ -1,0 +1,20 @@
+{
+	"name": "DS_GET_META_INFO_FILES",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BLOB_INPUT_DATASET",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DeleteFilesDatasets"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "inputcontainer"
+			}
+		}
+	}
+}
